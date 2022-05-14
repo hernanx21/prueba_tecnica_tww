@@ -4,12 +4,13 @@ const handlers = ({ axios }) => ({
         let jokes = []
 
         try{
-            for(i=0; idJokes.length<15; i++){
-                let result = await axios.get('https://api.chucknorris.io/jokes/random')
+            while(jokes.length < 15){
+                let result = await axios.get('https://api.chucknorris.io/jokes/random?category=religion')
+                
                 if(!(idJokes.indexOf(result.data.id) != -1)){
                     jokes.push(result.data)
-                    idJokes.push(result.data.id)
                 }
+                idJokes.push(result.data.id)
             }
 
             res.status(200).json(jokes)
